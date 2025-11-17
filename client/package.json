@@ -10,6 +10,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
+    "cross-env": "^10.1.0",
     "formik": "^2.1.5",
     "particles.js": "^2.0.0",
     "prop-types": "^15.7.2",
@@ -24,14 +25,12 @@
     "redux-thunk": "^2.3.0",
     "timeago-react": "^3.0.2",
     "typeface-varela-round": "0.0.71",
+    "webpack": "^5.102.1",
     "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cmd /c \"set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build\"",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "rm -rf build && npm run build"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
