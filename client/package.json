@@ -27,9 +27,9 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "start": "cmd /c \"set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start\"",
-    "build": "cmd /c \"set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build\"",
-    "test": "cmd /c \"set NODE_OPTIONS=--openssl-legacy-provider && react-scripts test\"",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "rm -rf build && npm run build"
   },
