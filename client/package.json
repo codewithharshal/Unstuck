@@ -46,7 +46,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://unstuck-five.vercel.app",
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
