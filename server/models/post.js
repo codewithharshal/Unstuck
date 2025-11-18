@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const schemaCleaner = require('../utils/schemaCleaner');
+const mongoose = require("mongoose");
+const schemaCleaner = require("../utils/schemaCleaner");
 
 const replySchema = new mongoose.Schema({
   repliedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   replyBody: {
     type: String,
@@ -13,13 +13,13 @@ const replySchema = new mongoose.Schema({
   upvotedBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   ],
   downvotedBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   ],
   pointsCount: {
@@ -33,7 +33,7 @@ const replySchema = new mongoose.Schema({
 const commentSchema = new mongoose.Schema({
   commentedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   commentBody: {
     type: String,
@@ -43,13 +43,13 @@ const commentSchema = new mongoose.Schema({
   upvotedBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   ],
   downvotedBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   ],
   pointsCount: {
@@ -64,7 +64,7 @@ const postSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    maxlength: 100,
+    maxlength: 200,
     trim: true,
   },
   postType: {
@@ -91,22 +91,22 @@ const postSchema = new mongoose.Schema({
   },
   subreddit: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Subreddit',
+    ref: "Subreddit",
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   upvotedBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   ],
   downvotedBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   ],
   pointsCount: {
@@ -145,4 +145,4 @@ schemaCleaner(postSchema);
 schemaCleaner(commentSchema);
 schemaCleaner(replySchema);
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model("Post", postSchema);
