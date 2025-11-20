@@ -3,9 +3,9 @@
   "name": "Unstuck",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "favicon.jpeg",
       "sizes": "64x64",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
       "src": "logo256.png",
