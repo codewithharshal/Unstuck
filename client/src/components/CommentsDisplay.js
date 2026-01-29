@@ -1,22 +1,22 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
-import { UpvoteButton, DownvoteButton } from './VoteButtons';
-import CommentsAndButtons from './CommentAndButtons';
-import ReplyAndButtons from './ReplyAndButtons';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
+import { UpvoteButton, DownvoteButton } from "./VoteButtons";
+import CommentsAndButtons from "./CommentAndButtons";
+import ReplyAndButtons from "./ReplyAndButtons";
 import {
   toggleCommentUpvote,
   toggleCommentDownvote,
   toggleReplyUpvote,
   toggleReplyDownvote,
-} from '../reducers/postCommentsReducer';
-import { notify } from '../reducers/notificationReducer';
-import TimeAgo from 'timeago-react';
-import getErrorMsg from '../utils/getErrorMsg';
+} from "../reducers/postCommentsReducer";
+import { notify } from "../reducers/notificationReducer";
+import TimeAgo from "timeago-react";
+import getErrorMsg from "../utils/getErrorMsg";
 
-import { Typography, Link } from '@material-ui/core';
-import { usePostCommentsStyles } from '../styles/muiStyles';
-import ForumIcon from '@material-ui/icons/Forum';
+import { Typography, Link } from "@material-ui/core";
+import { usePostCommentsStyles } from "../styles/muiStyles";
+import ForumIcon from "@material-ui/icons/Forum";
 
 const CommentsDisplay = ({ comments, postId, isMobile }) => {
   const classes = usePostCommentsStyles();
@@ -30,7 +30,7 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
       if (upvotedBy.includes(user.id)) {
         const updatedUpvotedBy = upvotedBy.filter((u) => u !== user.id);
         dispatch(
-          toggleCommentUpvote(postId, commentId, updatedUpvotedBy, downvotedBy)
+          toggleCommentUpvote(postId, commentId, updatedUpvotedBy, downvotedBy),
         );
       } else {
         const updatedUpvotedBy = [...upvotedBy, user.id];
@@ -40,12 +40,12 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             postId,
             commentId,
             updatedUpvotedBy,
-            updatedDownvotedBy
-          )
+            updatedDownvotedBy,
+          ),
         );
       }
     } catch (err) {
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
@@ -60,8 +60,8 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             postId,
             commentId,
             updatedDownvotedBy,
-            upvotedBy
-          )
+            upvotedBy,
+          ),
         );
       } else {
         const updatedDownvotedBy = [...downvotedBy, user.id];
@@ -71,19 +71,19 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             postId,
             commentId,
             updatedDownvotedBy,
-            updatedUpvotedBy
-          )
+            updatedUpvotedBy,
+          ),
         );
       }
     } catch (err) {
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
   const handleReplyUpvote = async (commentId, replyId) => {
     const targetComment = comments.find((c) => c.id === commentId);
     const { upvotedBy, downvotedBy } = targetComment.replies.find(
-      (r) => r.id === replyId
+      (r) => r.id === replyId,
     );
 
     try {
@@ -95,8 +95,8 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             commentId,
             replyId,
             updatedUpvotedBy,
-            downvotedBy
-          )
+            downvotedBy,
+          ),
         );
       } else {
         const updatedUpvotedBy = [...upvotedBy, user.id];
@@ -107,19 +107,19 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             commentId,
             replyId,
             updatedUpvotedBy,
-            updatedDownvotedBy
-          )
+            updatedDownvotedBy,
+          ),
         );
       }
     } catch (err) {
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
   const handleReplyDownvote = async (commentId, replyId) => {
     const targetComment = comments.find((c) => c.id === commentId);
     const { upvotedBy, downvotedBy } = targetComment.replies.find(
-      (r) => r.id === replyId
+      (r) => r.id === replyId,
     );
 
     try {
@@ -131,8 +131,8 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             commentId,
             replyId,
             updatedDownvotedBy,
-            upvotedBy
-          )
+            upvotedBy,
+          ),
         );
       } else {
         const updatedDownvotedBy = [...downvotedBy, user.id];
@@ -143,12 +143,12 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             commentId,
             replyId,
             updatedDownvotedBy,
-            updatedUpvotedBy
-          )
+            updatedUpvotedBy,
+          ),
         );
       }
     } catch (err) {
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
@@ -160,12 +160,12 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             {by.username}
           </Link>
           {` ${comment.pointsCount} ${
-            comment.pointsCount === 1 ? 'point' : 'points'
+            comment.pointsCount === 1 ? "point" : "points"
           } • `}
           <TimeAgo datetime={new Date(comment.createdAt)} />
           {comment.createdAt !== comment.updatedAt && (
             <em>
-              {' • edited'} <TimeAgo datetime={new Date(comment.updatedAt)} />
+              {" • edited"} <TimeAgo datetime={new Date(comment.updatedAt)} />
             </em>
           )}
         </Typography>
@@ -175,7 +175,7 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
 
   return (
     <div className={classes.commentsContainer}>
-      {comments.length !== 0 ? (
+      {comments.length !== 0 ?
         comments.map((c) => (
           <div key={c.id} className={classes.wholeComment}>
             <div className={classes.commentWrapper}>
@@ -229,8 +229,7 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             ))}
           </div>
         ))
-      ) : (
-        <div className={classes.noCommentsBanner}>
+      : <div className={classes.noCommentsBanner}>
           <ForumIcon color="primary" fontSize="large" />
           <Typography variant="h5" color="secondary">
             No Comments Yet
@@ -239,7 +238,7 @@ const CommentsDisplay = ({ comments, postId, isMobile }) => {
             Be the first to share what you think!
           </Typography>
         </div>
-      )}
+      }
     </div>
   );
 };

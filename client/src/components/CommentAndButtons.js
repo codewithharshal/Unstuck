@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   addReply,
   editComment,
   deleteComment,
-} from '../reducers/postCommentsReducer';
-import { notify } from '../reducers/notificationReducer';
-import DeleteDialog from './DeleteDialog';
-import getErrorMsg from '../utils/getErrorMsg';
+} from "../reducers/postCommentsReducer";
+import { notify } from "../reducers/notificationReducer";
+import DeleteDialog from "./DeleteDialog";
+import getErrorMsg from "../utils/getErrorMsg";
 
-import { TextField, Button, Typography } from '@material-ui/core';
-import { useCommentAndBtnsStyles } from '../styles/muiStyles';
-import ReplyIcon from '@material-ui/icons/Reply';
-import SendIcon from '@material-ui/icons/Send';
-import EditIcon from '@material-ui/icons/Edit';
+import { TextField, Button, Typography, Box } from "@material-ui/core";
+import { useCommentAndBtnsStyles } from "../styles/muiStyles";
+import ReplyIcon from "@material-ui/icons/Reply";
+import SendIcon from "@material-ui/icons/Send";
+import EditIcon from "@material-ui/icons/Edit";
 
 const CommentAndButtons = ({ isMobile, comment, postId, user }) => {
   const classes = useCommentAndBtnsStyles();
   const dispatch = useDispatch();
   const [replyOpen, setReplyOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [replyInput, setReplyInput] = useState('');
+  const [replyInput, setReplyInput] = useState("");
   const [editInput, setEditInput] = useState(comment.commentBody);
   const [submitting, setSubmitting] = useState(false);
 
@@ -30,11 +30,11 @@ const CommentAndButtons = ({ isMobile, comment, postId, user }) => {
       await dispatch(addReply(postId, comment.id, replyInput));
       setSubmitting(false);
       setReplyOpen(false);
-      setReplyInput('');
-      dispatch(notify(`Reply submitted!`, 'success'));
+      setReplyInput("");
+      dispatch(notify(`Reply submitted!`, "success"));
     } catch (err) {
       setSubmitting(false);
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
@@ -44,28 +44,57 @@ const CommentAndButtons = ({ isMobile, comment, postId, user }) => {
       await dispatch(editComment(postId, comment.id, editInput));
       setSubmitting(false);
       setEditOpen(false);
-      dispatch(notify(`Comment edited!`, 'success'));
+      dispatch(notify(`Comment edited!`, "success"));
     } catch (err) {
       setSubmitting(false);
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
   const handleCommentDelete = async () => {
     try {
       await dispatch(deleteComment(postId, comment.id));
-      dispatch(notify(`Comment deleted!`, 'success'));
+      dispatch(notify(`Comment deleted!`, "success"));
     } catch (err) {
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
   return (
     <div>
-      {!editOpen ? (
-        <Typography variant="body2">{comment.commentBody}</Typography>
-      ) : (
-        <div className={classes.inputDiv}>
+      {!editOpen ?
+        <Box
+          dangerouslySetInnerHTML={{ __html: comment.commentBody }}
+          sx={{
+            "& p": { margin: "0 0 8px 0" },
+            "& ul, & ol": { margin: "8px 0", paddingLeft: "20px" },
+            "& li": { margin: "4px 0" },
+            "& blockquote": {
+              borderLeft: "4px solid #ccc",
+              paddingLeft: "12px",
+              margin: "8px 0",
+              color: "#666",
+            },
+            "& code": {
+              backgroundColor: "#f5f5f5",
+              padding: "2px 6px",
+              borderRadius: "4px",
+              fontFamily: "monospace",
+            },
+            "& pre": {
+              backgroundColor: "#f5f5f5",
+              padding: "8px",
+              borderRadius: "4px",
+              overflow: "auto",
+            },
+            "& a": {
+              color: "primary.main",
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
+            },
+          }}
+        />
+      : <div className={classes.inputDiv}>
           <TextField
             multiline
             fullWidth
@@ -74,7 +103,7 @@ const CommentAndButtons = ({ isMobile, comment, postId, user }) => {
             value={editInput}
             onChange={(e) => setEditInput(e.target.value)}
             variant="outlined"
-            size={isMobile ? 'small' : 'medium'}
+            size={isMobile ? "small" : "medium"}
           />
           <div className={classes.submitBtns}>
             <Button
@@ -94,11 +123,11 @@ const CommentAndButtons = ({ isMobile, comment, postId, user }) => {
               size="small"
               disabled={submitting}
             >
-              {submitting ? 'Updating' : 'Update'}
+              {submitting ? "Updating" : "Update"}
             </Button>
           </div>
         </div>
-      )}
+      }
       <div className={classes.btnBar}>
         {user && (
           <Button
@@ -138,7 +167,7 @@ const CommentAndButtons = ({ isMobile, comment, postId, user }) => {
             value={replyInput}
             onChange={(e) => setReplyInput(e.target.value)}
             variant="outlined"
-            size={isMobile ? 'small' : 'medium'}
+            size={isMobile ? "small" : "medium"}
           />
           <div className={classes.submitBtns}>
             <Button
@@ -158,7 +187,7 @@ const CommentAndButtons = ({ isMobile, comment, postId, user }) => {
               size="small"
               disabled={submitting}
             >
-              {submitting ? 'Replying' : 'Reply'}
+              {submitting ? "Replying" : "Reply"}
             </Button>
           </div>
         </div>

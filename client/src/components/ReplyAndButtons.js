@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { editReply, deleteReply } from '../reducers/postCommentsReducer';
-import { notify } from '../reducers/notificationReducer';
-import DeleteDialog from './DeleteDialog';
-import getErrorMsg from '../utils/getErrorMsg';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editReply, deleteReply } from "../reducers/postCommentsReducer";
+import { notify } from "../reducers/notificationReducer";
+import DeleteDialog from "./DeleteDialog";
+import getErrorMsg from "../utils/getErrorMsg";
 
-import { TextField, Button, Typography } from '@material-ui/core';
-import { useCommentAndBtnsStyles } from '../styles/muiStyles';
-import SendIcon from '@material-ui/icons/Send';
-import EditIcon from '@material-ui/icons/Edit';
+import { TextField, Button, Typography, Box } from "@material-ui/core";
+import { useCommentAndBtnsStyles } from "../styles/muiStyles";
+import SendIcon from "@material-ui/icons/Send";
+import EditIcon from "@material-ui/icons/Edit";
 
 const ReplyAndButtons = ({ isMobile, reply, postId, commentId, user }) => {
   const [editOpen, setEditOpen] = useState(false);
@@ -23,28 +23,57 @@ const ReplyAndButtons = ({ isMobile, reply, postId, commentId, user }) => {
       await dispatch(editReply(postId, commentId, reply.id, editInput));
       setSubmitting(false);
       setEditOpen(false);
-      dispatch(notify(`Reply edited!`, 'success'));
+      dispatch(notify(`Reply edited!`, "success"));
     } catch (err) {
       setSubmitting(false);
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
   const handleReplyDelete = async () => {
     try {
       await dispatch(deleteReply(postId, commentId, reply.id));
-      dispatch(notify(`Reply deleted!`, 'success'));
+      dispatch(notify(`Reply deleted!`, "success"));
     } catch (err) {
-      dispatch(notify(getErrorMsg(err), 'error'));
+      dispatch(notify(getErrorMsg(err), "error"));
     }
   };
 
   return (
     <div>
-      {!editOpen ? (
-        <Typography variant="body2">{reply.replyBody}</Typography>
-      ) : (
-        <div className={classes.inputDiv}>
+      {!editOpen ?
+        <Box
+          dangerouslySetInnerHTML={{ __html: reply.replyBody }}
+          sx={{
+            "& p": { margin: "0 0 8px 0" },
+            "& ul, & ol": { margin: "8px 0", paddingLeft: "20px" },
+            "& li": { margin: "4px 0" },
+            "& blockquote": {
+              borderLeft: "4px solid #ccc",
+              paddingLeft: "12px",
+              margin: "8px 0",
+              color: "#666",
+            },
+            "& code": {
+              backgroundColor: "#f5f5f5",
+              padding: "2px 6px",
+              borderRadius: "4px",
+              fontFamily: "monospace",
+            },
+            "& pre": {
+              backgroundColor: "#f5f5f5",
+              padding: "8px",
+              borderRadius: "4px",
+              overflow: "auto",
+            },
+            "& a": {
+              color: "primary.main",
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
+            },
+          }}
+        />
+      : <div className={classes.inputDiv}>
           <TextField
             multiline
             required
@@ -54,7 +83,7 @@ const ReplyAndButtons = ({ isMobile, reply, postId, commentId, user }) => {
             value={editInput}
             onChange={(e) => setEditInput(e.target.value)}
             variant="outlined"
-            size={isMobile ? 'small' : 'medium'}
+            size={isMobile ? "small" : "medium"}
           />
           <div className={classes.submitBtns}>
             <Button
@@ -74,11 +103,11 @@ const ReplyAndButtons = ({ isMobile, reply, postId, commentId, user }) => {
               size="small"
               disabled={submitting}
             >
-              {submitting ? 'Updating' : 'Update'}
+              {submitting ? "Updating" : "Update"}
             </Button>
           </div>
         </div>
-      )}
+      }
       {user && user.id === reply.repliedBy.id && (
         <div className={classes.btnBar}>
           <Button
