@@ -126,6 +126,18 @@ const postSchema = new mongoose.Schema({
     default: 0,
   },
   comments: [commentSchema],
+  flowchart: {
+    sourceTitle: {
+      type: String,
+      trim: true,
+    },
+    chart: {
+      type: mongoose.Schema.Types.Mixed,
+    },
+    generatedAt: {
+      type: Date,
+    },
+  },
   commentCount: {
     type: Number,
     default: 0,

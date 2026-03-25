@@ -25,6 +25,7 @@ import {
   useMediaQuery,
   Typography,
   Link,
+  Button,
   MenuItem,
   ListItemIcon,
   Divider,
@@ -222,6 +223,14 @@ const PostCommentsPage = () => {
                   <Typography variant="subtitle2">{commentCount}</Typography>
                 </ListItemIcon>
               </MenuItem>
+              <Button
+                component={RouterLink}
+                to={`/find-flow?postId=${id}&autogen=1`}
+                size="small"
+                color="primary"
+              >
+                Build Flowchart
+              </Button>
               {user && user.id === author.id && (
                 <EditDeleteMenu
                   id={id}

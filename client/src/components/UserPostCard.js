@@ -172,6 +172,15 @@ const UserPostCard = ({ post, user, isMobile }) => {
           >
             {commentCount} Comments
           </Button>
+          <Button
+            color="primary"
+            size="small"
+            className={classes.commentsBtn}
+            component={RouterLink}
+            to={`/find-flow?postId=${id}&autogen=1`}
+          >
+            Build Flowchart
+          </Button>
         </div>
       </div>
     </Paper>

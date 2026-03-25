@@ -24,6 +24,7 @@ const {
   upvoteReply,
   downvoteReply,
 } = require("../controllers/commentVote");
+const { generatePostFlowchart } = require("../controllers/AiFlowChartContoller");
 
 const router = express.Router();
 
@@ -31,6 +32,7 @@ const router = express.Router();
 router.get("/", getPosts);
 router.get("/search", getSearchedPosts);
 router.get("/:id/comments", getPostAndComments);
+router.post("/:id/flowchart", generatePostFlowchart);
 router.get("/subscribed", auth, getSubscribedPosts);
 router.post("/", auth, createNewPost);
 router.patch("/:id", auth, updatePost);

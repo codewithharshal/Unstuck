@@ -105,10 +105,9 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
           <Typography
             variant="body1"
             style={{
-              color: isUpvoted
-                ? theme.palette.primary.main
-                : isDownvoted
-                ? theme.palette.secondary.main
+              color:
+                isUpvoted ? theme.palette.primary.main
+                : isDownvoted ? theme.palette.secondary.main
                 : theme.palette.text.primary,
               fontWeight: 600,
             }}
@@ -123,7 +122,7 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
           />
         </div>
         <div className={classes.thumbnailWrapper}>
-          {postType === "Text" ? (
+          {postType === "Text" ?
             <RouterLink
               to={`/comments/${id}`}
               onClick={(e) => e.stopPropagation()}
@@ -136,7 +135,7 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
                 />
               </Paper>
             </RouterLink>
-          ) : postType === "Link" ? (
+          : postType === "Link" ?
             <a href={fixUrl(linkSubmission)} target="_noblank">
               <Paper elevation={0} square className={classes.thumbnail}>
                 <LinkIcon
@@ -146,8 +145,7 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
                 />
               </Paper>
             </a>
-          ) : (
-            <Paper elevation={0} square className={classes.thumbnail}>
+          : <Paper elevation={0} square className={classes.thumbnail}>
               <CardMedia
                 className={classes.thumbnail}
                 image={getEditedThumbail(imageSubmission.imageLink)}
@@ -157,7 +155,7 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
                 target="_noblank"
               />
             </Paper>
-          )}
+          }
         </div>
         <div className={classes.postInfoWrapper}>
           <Typography variant="h6" className={classes.title}>
@@ -169,11 +167,10 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
             >
               <Link
                 href={
-                  postType === "Link"
-                    ? fixUrl(linkSubmission)
-                    : postType === "Image"
-                    ? imageSubmission.imageLink
-                    : ""
+                  postType === "Link" ? fixUrl(linkSubmission)
+                  : postType === "Image" ?
+                    imageSubmission.imageLink
+                  : ""
                 }
               >
                 {postType === "Text" ? null : ""}
@@ -181,7 +178,7 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
             </Typography>
           </Typography>
           <Typography variant="subtitle2">
-            {subreddit ? (
+            {subreddit ?
               <Link
                 onClick={(e) => {
                   e.stopPropagation();
@@ -191,9 +188,7 @@ const PostCard = ({ post, toggleUpvote, toggleDownvote }) => {
               >
                 r/{subreddit.subredditName}
               </Link>
-            ) : (
-              <span>r/unknown</span>
-            )}
+            : <span>r/unknown</span>}
             <Typography variant="caption" className={classes.userAndDate}>
               Posted by{" "}
               <Link
