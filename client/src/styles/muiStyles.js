@@ -99,7 +99,7 @@ export const useNavStyles = makeStyles(
     },
     inputField: {
       width: '320px',
-      backgroundColor: theme.palette.type === 'light' ? '#f5f5f5' : '#121212',
+      backgroundColor: theme.palette.type === 'light' ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)',
       borderRadius: 20,
       '& .MuiOutlinedInput-root': {
         paddingRight: 0,
@@ -237,7 +237,12 @@ export const usePostListStyles = makeStyles(
       width: '100%',
       marginBottom: '1em',
       display: 'flex',
+      flexDirection: 'column',
+    },
+    listFlex: {
+      display: 'flex',
       alignItems: 'flex-start',
+      width: '100%',
     },
     tabsColumn: {
       minWidth: 64,
@@ -258,8 +263,10 @@ export const usePostListStyles = makeStyles(
       flexGrow: 1,
     },
     loadBtnWrapper: {
+      alignSelf: 'center',
       display: 'flex',
       justifyContent: 'center',
+      width: '100%',
     },
     loadBtn: {
       marginTop: '0.8em',
@@ -273,6 +280,7 @@ export const usePostListStyles = makeStyles(
       textAlign: 'center',
       marginTop: '12em',
       marginBottom: '6em',
+      alignSelf: 'center',
     },
   }),
   { index: 1 }
@@ -290,7 +298,7 @@ export const useCardStyles = makeStyles(
       flexDirection: 'column',
       width: 30,
       alignItems: 'center',
-      backgroundColor: theme.palette.type === 'light' ? '#f7f5f3' : '#2f271f',
+      backgroundColor: 'transparent',
     },
     thumbnailWrapper: {
       alignSelf: 'center',
@@ -301,7 +309,7 @@ export const useCardStyles = makeStyles(
       width: 70,
       height: 90,
       textAlign: 'center',
-      backgroundColor: theme.palette.type === 'light' ? '#f7f5f3' : '#2f271f',
+      backgroundColor: theme.palette.type === 'light' ? 'rgba(0,0,0,0.02)' : 'rgba(255,255,255,0.04)',
       borderRadius: 8,
       [theme.breakpoints.down('xs')]: {
         width: 60,
@@ -426,7 +434,7 @@ export const usePostCommentsStyles = makeStyles(
       width: 50,
       alignItems: 'center',
       justifyContent: 'flex-start',
-      backgroundColor: theme.palette.type === 'light' ? '#f7f5f3' : '#2f271f',
+      backgroundColor: 'transparent',
       [theme.breakpoints.down('xs')]: {
         width: 35,
       },

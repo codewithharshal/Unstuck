@@ -6,7 +6,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
-  background-color: #191818;
   /* ensure full-bleed black background */
   overflow-x: hidden;
 }

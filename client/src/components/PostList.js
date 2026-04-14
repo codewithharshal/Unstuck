@@ -61,28 +61,30 @@ const PostList = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.tabsColumn}>
-        <SortTabBar
-          sortBy={sortBy}
-          handleTabChange={handleTabChange}
-          subscribedTab={true}
-          user={user}
-          orientation={isMobile ? 'horizontal' : 'vertical'}
-        />
-      </div>
-      <div className={classes.postsColumn}>
-        {posts && posts.results && !pageLoading ? (
-          posts.results.map((post) => (
-            <PostCard
-              post={post}
-              key={post.id}
-              toggleUpvote={toggleUpvote}
-              toggleDownvote={toggleDownvote}
-            />
-          ))
-        ) : (
-          <LoadingSpinner text={'Fetching posts. Wait a sec.'} />
-        )}
+      <div className={classes.listFlex}>
+        <div className={classes.tabsColumn}>
+          <SortTabBar
+            sortBy={sortBy}
+            handleTabChange={handleTabChange}
+            subscribedTab={true}
+            user={user}
+            orientation={isMobile ? 'horizontal' : 'vertical'}
+          />
+        </div>
+        <div className={classes.postsColumn}>
+          {posts && posts.results && !pageLoading ? (
+            posts.results.map((post) => (
+              <PostCard
+                post={post}
+                key={post.id}
+                toggleUpvote={toggleUpvote}
+                toggleDownvote={toggleDownvote}
+              />
+            ))
+          ) : (
+            <LoadingSpinner text={'Fetching posts. Wait a sec.'} />
+          )}
+        </div>
       </div>
       {sortBy === 'subscribed' && posts.results.length === 0 && (
         <div className={classes.noSubscribedPosts}>
