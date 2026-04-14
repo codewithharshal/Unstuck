@@ -553,7 +553,7 @@ export default function AIFlowchartGenerator() {
               }}
             />
             <button
-              onClick={generate}
+              onClick={() => generate()}
               disabled={!selectedPostId || loadingPosts || loading}
               style={{
                 padding: "11px 20px",
